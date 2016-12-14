@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * MageWorx
+ * GA Fixer
+ *
+ * @category   MageWorx
+ * @package    MageWorx_GA
+ * @copyright  Copyright (c) 2016 MageWorx (http://www.mageworx.com/)
+ */
+-->
+
+<config>
+  <modules>
+    <MageWorx_GA>
+      <version>0.1.0</version>
+    </MageWorx_GA>
+  </modules>
+  <global>
+    <helpers>
+      <ga>
+        <class>MageWorx_GA_Helper</class>
+      </ga>
+    </helpers>
+    <models>
+      <ga>
+        <class>MageWorx_GA_Model</class>
+        <resourceModel>ga_mysql4</resourceModel>
+      </ga>
+    </models>
+    <events>
+      <core_block_abstract_to_html_before>
+        <observers>
+          <core_block_abstract_to_html_before_handler>
+            <type>singleton</type>
+            <class>ga/observer</class>
+            <method>addGoogleAnalyticsOrdersToBlock</method>
+            <args></args>
+          </core_block_abstract_to_html_before_handler>
+        </observers>
+      </core_block_abstract_to_html_before>
+      <checkout_onepage_controller_success_action>
+        <observers>
+          <checkout_onepage_controller_success_action_handler>
+            <type>model</type>
+            <class>ga/observer</class>
+            <method>setGoogleAnalyticsOrders</method>
+            <args></args>
+          </checkout_onepage_controller_success_action_handler>
+        </observers>
+      </checkout_onepage_controller_success_action>
+    </events>
+  </global>
+</config>
